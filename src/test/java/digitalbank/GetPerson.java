@@ -11,6 +11,7 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -21,84 +22,63 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 public class GetPerson {
+    ClassLoader cl = getClass().getClassLoader();
+String accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqc21pdGhAZGVtby5pbyIsImF1dGgiOlt7ImF1dGhvcml0eSI6IlJPTEVfQVBJIn0seyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sImlhdCI6MTY5NDU1NjAzMiwiZXhwIjoxNjk0NTU5NjMyfQ.TqvGzR7Si8rGrbT_zYCZPmg3ZqXtCkDyZ1JLRScoZZU\"";
+String URL = "http://13.53.168.89:8080";
+//String URL = "http://localhost:8080";
 
-    @BeforeTest
-    public static String getToken() {
-
-
-        RestAssured.baseURI = "http://localhost:8080/bank/";
-
-        RequestSpecification request = RestAssured.given();
-
-        String payload = "{\r\n" +
-                "  \"userName\": \"admin@demo.io\",\r\n" +
-                "  \"password\": \"Demo123!\"\r\n" +
-                "}";
-
-        request.header("Content-Type","application/json");
-
-        Response responseFromGenerateToken = request.body(payload).post("/api/v1/auth");
-
-        String jsonString = responseFromGenerateToken.getBody().asString();
-
-        String tokenGenerated = JsonPath.from(jsonString).get("token");
-
-        request.header("Authorization","Bearer "+tokenGenerated)
-                .header("Content-Type","application/json");
-
-        return tokenGenerated;
-
-
-    }
+/* 4 Is admin account, so if you get token from there use that. 79 or 71 is from Jhsmith */
     @Test
-    public static void getUsers() {
-        given()
-                .header("Authorization", "Bearer " + getToken())
+    @Parameters("id")
+    public void getCustomerName(@Optional("88") int id){
+        given().auth().preemptive().oauth2(accessToken)
                 .when()
-                .get("/users")
+                .get(URL + "/bank/api/v1/user/" + id)
                 .then()
+                .body(containsString("id"))
+                .body("id", equalTo(id))
                 .statusCode(200);
     }
 
     @Test
-    public void getTest() {
-        given()
-                .headers(
-                        "Authorization",
-                        "Bearer " + getToken(),
-                        "Content-Type",
-                        ContentType.JSON,
-                        "Accept",
-                        ContentType.JSON)
+    @Parameters("id")
+    public void getSavingsAccount(@Optional("88") int id){
+        given().auth().preemptive().oauth2(accessToken)
                 .when()
-                .get("http://localhost:8080/bank/api/v1/users")
+                .get(URL + "/bank/api/v1/account/" + id)
                 .then()
-                .contentType(ContentType.JSON)
-                .extract()
-                .response();
-    }
-
-
-    @BeforeClass
-    public void setupTest() throws IOException {
-        basePath = "/api/v1/";
-        InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties");
-        Properties prop = new Properties();
-        prop.load(input);
-        baseURI = prop.getProperty("URL");
-        authentication = basic(prop.getProperty("username"), prop.getProperty("password"));
-        enableLoggingOfRequestAndResponseIfValidationFails();
+                .body(containsString("id"))
+                .body("name", equalTo("Indiviudal Savings"))
+                .body("accountType.id", equalTo(11))
+                .statusCode(200);
     }
 
     @Test
     @Parameters("id")
-    public void getCustomerName(@Optional("79") String id){
+    public void postDeposit(@Optional("88") int id) {
+        String jsonString = "{\"amount\" : \"150\",\"description\" : \"Online Deposit\",\"transactionTypeCode\" : \"DPT\"}";
         given()
+                .accept(ContentType.JSON)
+                .contentType(ContentType.JSON)
+                .body(jsonString)
                 .when()
-                .get("/account/" + id)
+                .post(URL + "/bank/api/v1/account/" + id)
                 .then()
                 .body(containsString("id"))
-                .body("id", equalTo(id))
+                .statusCode(200);
+    }
+
+    @Test
+    public void postDepositFile(){
+        File requestBody = new File(cl.getResource("deposit.json").getFile());
+        given()
+                .accept(ContentType.JSON)
+                .contentType(ContentType.JSON)
+                .body(requestBody)
+                .when()
+                .post("/sjekkmedlem")
+                .then()
+                .body(containsString("messageId"))
                 .statusCode(200);
     }
 }
