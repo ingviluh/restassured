@@ -4,8 +4,6 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
 
 public class AccountTests {
     String authToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqc21pdGhAZGVtby5pbyIsImF1dGgiOlt7ImF1dGhvcml0eSI6IlJPTEVfQVBJIn0seyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sImlhdCI6MTY5NDU1ODcxOCwiZXhwIjoxNjk0NTYyMzE4fQ.diBwxgHJChNIe8Zj-PnM9o-Ss1u1lVEgPcQxZfPhcp0";
