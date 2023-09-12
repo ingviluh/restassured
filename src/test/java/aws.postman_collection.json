@@ -7,691 +7,599 @@
 	},
 	"item": [
 		{
-			"name": "OPPGAVE 1",
-			"item": [
+			"name": "Get authorized",
+			"event": [
 				{
-					"name": "Get authorized",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"\r",
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"pm.test(\"Response time is less than 1000ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
-									"});\r",
-									"\r",
-									"var jsonResponse = JSON.parse(responseBody);\r",
-									"pm.collectionVariables.set(\"authToken\", jsonResponse.authToken);\r",
-									"console.info(\"authToken = \" + jsonResponse.authToken)\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "",
-								"value": "",
-								"type": "text",
-								"disabled": true
-							}
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"var jsonResponse = JSON.parse(responseBody);\r",
+							"pm.collectionVariables.set(\"authToken\", jsonResponse.authToken);\r",
+							"console.info(\"authToken = \" + jsonResponse.authToken)\r",
+							""
 						],
-						"url": {
-							"raw": "http://13.53.168.89:8080/bank/api/v1/auth?password=Demo123!&username=jsmith@demo.io",
-							"protocol": "http",
-							"host": [
-								"13",
-								"53",
-								"168",
-								"89"
-							],
-							"port": "8080",
-							"path": [
-								"bank",
-								"api",
-								"v1",
-								"auth"
-							],
-							"query": [
-								{
-									"key": "password",
-									"value": "Demo123!"
-								},
-								{
-									"key": "username",
-									"value": "jsmith@demo.io"
-								}
-							]
-						}
-					},
-					"response": []
+						"type": "text/javascript"
+					}
 				}
-			]
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://13.53.168.89:8080/bank/api/v1/auth?password=Demo123!&username=jsmith@demo.io",
+					"protocol": "http",
+					"host": [
+						"13",
+						"53",
+						"168",
+						"89"
+					],
+					"port": "8080",
+					"path": [
+						"bank",
+						"api",
+						"v1",
+						"auth"
+					],
+					"query": [
+						{
+							"key": "password",
+							"value": "Demo123!"
+						},
+						{
+							"key": "username",
+							"value": "jsmith@demo.io"
+						}
+					]
+				}
+			},
+			"response": []
 		},
 		{
-			"name": "OPPGAVE 2",
-			"item": [
+			"name": "Get all accounts for user",
+			"event": [
 				{
-					"name": "Get authorized",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"\r",
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"pm.test(\"Response time is less than 1000ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
-									"});\r",
-									"\r",
-									"var jsonResponse = JSON.parse(responseBody);\r",
-									"pm.collectionVariables.set(\"authToken\", jsonResponse.authToken);\r",
-									"console.info(\"authToken = \" + jsonResponse.authToken)\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "",
-								"value": "",
-								"type": "text",
-								"disabled": true
-							}
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonResponse = JSON.parse(responseBody);\r",
+							"pm.collectionVariables.set(\"currentBalance\", jsonResponse.currentBalance);\r",
+							"console.info(\"Konto = \" +jsonResponse[0].name + \"\\n Balanse: \" + jsonResponse[0].currentBalance)"
 						],
-						"url": {
-							"raw": "http://13.53.168.89:8080/bank/api/v1/auth?password=Demo123!&username=jsmith@demo.io",
-							"protocol": "http",
-							"host": [
-								"13",
-								"53",
-								"168",
-								"89"
-							],
-							"port": "8080",
-							"path": [
-								"bank",
-								"api",
-								"v1",
-								"auth"
-							],
-							"query": [
-								{
-									"key": "password",
-									"value": "Demo123!"
-								},
-								{
-									"key": "username",
-									"value": "jsmith@demo.io"
-								}
-							]
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
 						}
-					},
-					"response": []
+					]
 				},
-				{
-					"name": "Get all accounts for user",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"var jsonResponse = JSON.parse(responseBody);\r",
-									"pm.collectionVariables.set(\"currentBalance\", jsonResponse.currentBalance);\r",
-									"console.info(\"Konto = \" +jsonResponse[0].name + \"\\n Balanse: \" + jsonResponse[0].currentBalance)"
-								],
-								"type": "text/javascript"
-							}
-						}
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://13.53.168.89:8080/bank/api/v1/user/account",
+					"protocol": "http",
+					"host": [
+						"13",
+						"53",
+						"168",
+						"89"
 					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{authToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://13.53.168.89:8080/bank/api/v1/user/account",
-							"protocol": "http",
-							"host": [
-								"13",
-								"53",
-								"168",
-								"89"
-							],
-							"port": "8080",
-							"path": [
-								"bank",
-								"api",
-								"v1",
-								"user",
-								"account"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Individual Saving Account for user",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"var jsonResponse = JSON.parse(responseBody);\r",
-									"console.info(\"Balansen på savings account er: \" +jsonResponse.currentBalance);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{authToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://13.53.168.89:8080/bank/api/v1/account/79",
-							"protocol": "http",
-							"host": [
-								"13",
-								"53",
-								"168",
-								"89"
-							],
-							"port": "8080",
-							"path": [
-								"bank",
-								"api",
-								"v1",
-								"account",
-								"79"
-							]
-						}
-					},
-					"response": []
+					"port": "8080",
+					"path": [
+						"bank",
+						"api",
+						"v1",
+						"user",
+						"account"
+					]
 				}
-			]
+			},
+			"response": []
 		},
 		{
-			"name": "OPPGAVE 3",
-			"item": [
+			"name": "Get Individual Saving Account for user",
+			"event": [
 				{
-					"name": "Create new transaction (deposit)",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.collectionVariables.set(\"Deposit\", 1000.00);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{authToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"amount\": {{Deposit}},\r\n  \"description\": \"Online Deposit\",\r\n  \"transactionTypeCode\": \"DPT\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://13.53.168.89:8080/bank/api/v1/account/79/transaction",
-							"protocol": "http",
-							"host": [
-								"13",
-								"53",
-								"168",
-								"89"
-							],
-							"port": "8080",
-							"path": [
-								"bank",
-								"api",
-								"v1",
-								"account",
-								"79",
-								"transaction"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "OPPGAVE 4",
-			"item": [
-				{
-					"name": "Create new transaction (withdrawal)",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 406\", function () {\r",
-									"    pm.response.to.have.status(406);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{authToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"amount\": 20000.00,\r\n  \"description\": \"Online Withdrawl\",\r\n  \"transactionTypeCode\": \"WTH\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://13.53.168.89:8080/bank/api/v1/account/79/transaction",
-							"protocol": "http",
-							"host": [
-								"13",
-								"53",
-								"168",
-								"89"
-							],
-							"port": "8080",
-							"path": [
-								"bank",
-								"api",
-								"v1",
-								"account",
-								"79",
-								"transaction"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "OPPGAVE 5",
-			"item": [
-				{
-					"name": "Get authorized as administrator",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"\r",
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"pm.test(\"Response time is less than 1000ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
-									"});\r",
-									"\r",
-									"var jsonResponse = JSON.parse(responseBody);\r",
-									"pm.collectionVariables.set(\"authToken\", jsonResponse.authToken);\r",
-									"console.log(\"authToken = \" + jsonResponse.authToken)\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "",
-								"value": "",
-								"type": "text",
-								"disabled": true
-							}
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonResponse = JSON.parse(responseBody);\r",
+							"console.info(\"Balansen på savings account er: \" +jsonResponse.currentBalance);"
 						],
-						"url": {
-							"raw": "http://13.53.168.89:8080/bank/api/v1/auth?username=admin@demo.io&password=Demo123!",
-							"protocol": "http",
-							"host": [
-								"13",
-								"53",
-								"168",
-								"89"
-							],
-							"port": "8080",
-							"path": [
-								"bank",
-								"api",
-								"v1",
-								"auth"
-							],
-							"query": [
-								{
-									"key": "username",
-									"value": "admin@demo.io"
-								},
-								{
-									"key": "password",
-									"value": "Demo123!"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create new user",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 201\", function () {",
-									"    pm.response.to.have.status(201);",
-									"});",
-									"",
-									"var jsonResponse = JSON.parse(responseBody);",
-									"pm.collectionVariables.set(\"userId\", jsonResponse.id);",
-									"console.info(\"userId = \" +jsonResponse.id)"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{authToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"address\": \"Testveien 123\",\n  \"country\": \"United States\",\n  \"dob\": \"09/02/1969\",\n  \"emailAddress\": \"tester100@demo.io\",\n  \"username\": \"tester100@demo.io\",\n  \"firstName\": \"Fremtind\",\n  \"gender\": \"F\",\n  \"homePhone\": \"224-624-8286\",\n  \"lastName\": \"Tester\",\n  \"locality\": \"Oslo\",\n  \"mobilePhone\": \"872-380-9421\",\n  \"password\": \"Demo123!\",\n  \"postalCode\": \"0105\",\n  \"region\": \"VA\",\n  \"ssn\": \"123-45-3000\",\n  \"title\": \"Mrs\",\n  \"workPhone\": \"037-370-7799\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://13.53.168.89:8080/bank/api/v1/user?role=USER",
-							"protocol": "http",
-							"host": [
-								"13",
-								"53",
-								"168",
-								"89"
-							],
-							"port": "8080",
-							"path": [
-								"bank",
-								"api",
-								"v1",
-								"user"
-							],
-							"query": [
-								{
-									"key": "role",
-									"value": "USER"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get all users",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{authToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://13.53.168.89:8080/bank/api/v1/users",
-							"protocol": "http",
-							"host": [
-								"13",
-								"53",
-								"168",
-								"89"
-							],
-							"port": "8080",
-							"path": [
-								"bank",
-								"api",
-								"v1",
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Add role to user",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{authToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"address\": \"Testveien 123\",\n  \"country\": \"United States\",\n  \"dob\": \"09/02/1969\",\n  \"emailAddress\": \"tester1@demo.io\",\n  \"username\": \"tester1@demo.io\",\n  \"firstName\": \"Fremtind\",\n  \"gender\": \"F\",\n  \"homePhone\": \"224-624-8286\",\n  \"lastName\": \"Tester\",\n  \"locality\": \"Oslo\",\n  \"mobilePhone\": \"872-380-9420\",\n  \"password\": \"Demo123!\",\n  \"postalCode\": \"0105\",\n  \"region\": \"VA\",\n  \"ssn\": \"123-45-9991\",\n  \"title\": \"Mrs\",\n  \"workPhone\": \"037-370-6915\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://13.53.168.89:8080/bank/api/v1/user/{{userId}}/role?role=API",
-							"protocol": "http",
-							"host": [
-								"13",
-								"53",
-								"168",
-								"89"
-							],
-							"port": "8080",
-							"path": [
-								"bank",
-								"api",
-								"v1",
-								"user",
-								"{{userId}}",
-								"role"
-							],
-							"query": [
-								{
-									"key": "role",
-									"value": "API"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get roles for user",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 201\", function () {",
-									"    pm.response.to.have.status(201);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{authToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"address\": \"Testveien 123\",\n  \"country\": \"United States\",\n  \"dob\": \"09/02/1969\",\n  \"emailAddress\": \"tester1@demo.io\",\n  \"username\": \"tester1@demo.io\",\n  \"firstName\": \"Fremtind\",\n  \"gender\": \"F\",\n  \"homePhone\": \"224-624-8286\",\n  \"lastName\": \"Tester\",\n  \"locality\": \"Oslo\",\n  \"mobilePhone\": \"872-380-9420\",\n  \"password\": \"Demo123!\",\n  \"postalCode\": \"0105\",\n  \"region\": \"VA\",\n  \"ssn\": \"123-45-9991\",\n  \"title\": \"Mrs\",\n  \"workPhone\": \"037-370-6915\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://13.53.168.89:8080/bank/api/v1/user/{{userId}}/role",
-							"protocol": "http",
-							"host": [
-								"13",
-								"53",
-								"168",
-								"89"
-							],
-							"port": "8080",
-							"path": [
-								"bank",
-								"api",
-								"v1",
-								"user",
-								"{{userId}}",
-								"role"
-							]
-						}
-					},
-					"response": []
+						"type": "text/javascript"
+					}
 				}
-			]
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://13.53.168.89:8080/bank/api/v1/account/79",
+					"protocol": "http",
+					"host": [
+						"13",
+						"53",
+						"168",
+						"89"
+					],
+					"port": "8080",
+					"path": [
+						"bank",
+						"api",
+						"v1",
+						"account",
+						"79"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create new transaction (deposit)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"Deposit\", 1000.00);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"amount\": {{Deposit}},\r\n  \"description\": \"Online Deposit\",\r\n  \"transactionTypeCode\": \"DPT\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://13.53.168.89:8080/bank/api/v1/account/79/transaction",
+					"protocol": "http",
+					"host": [
+						"13",
+						"53",
+						"168",
+						"89"
+					],
+					"port": "8080",
+					"path": [
+						"bank",
+						"api",
+						"v1",
+						"account",
+						"79",
+						"transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create new transaction (withdrawal)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 406\", function () {\r",
+							"    pm.response.to.have.status(406);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"amount\": 20000.00,\r\n  \"description\": \"Online Withdrawl\",\r\n  \"transactionTypeCode\": \"WTH\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://13.53.168.89:8080/bank/api/v1/account/79/transaction",
+					"protocol": "http",
+					"host": [
+						"13",
+						"53",
+						"168",
+						"89"
+					],
+					"port": "8080",
+					"path": [
+						"bank",
+						"api",
+						"v1",
+						"account",
+						"79",
+						"transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get authorized as administrator",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"var jsonResponse = JSON.parse(responseBody);\r",
+							"pm.collectionVariables.set(\"authToken\", jsonResponse.authToken);\r",
+							"console.log(\"authToken = \" + jsonResponse.authToken)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://13.53.168.89:8080/bank/api/v1/auth?username=admin@demo.io&password=Demo123!",
+					"protocol": "http",
+					"host": [
+						"13",
+						"53",
+						"168",
+						"89"
+					],
+					"port": "8080",
+					"path": [
+						"bank",
+						"api",
+						"v1",
+						"auth"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "admin@demo.io"
+						},
+						{
+							"key": "password",
+							"value": "Demo123!"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create new user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"var jsonResponse = JSON.parse(responseBody);",
+							"pm.collectionVariables.set(\"userId\", jsonResponse.id);",
+							"console.info(\"userId = \" +jsonResponse.id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"address\": \"Testveien 123\",\n  \"country\": \"United States\",\n  \"dob\": \"09/02/1969\",\n  \"emailAddress\": \"tester100@demo.io\",\n  \"username\": \"tester100@demo.io\",\n  \"firstName\": \"Fremtind\",\n  \"gender\": \"F\",\n  \"homePhone\": \"224-624-8286\",\n  \"lastName\": \"Tester\",\n  \"locality\": \"Oslo\",\n  \"mobilePhone\": \"872-380-9421\",\n  \"password\": \"Demo123!\",\n  \"postalCode\": \"0105\",\n  \"region\": \"VA\",\n  \"ssn\": \"123-45-3000\",\n  \"title\": \"Mrs\",\n  \"workPhone\": \"037-370-7799\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://13.53.168.89:8080/bank/api/v1/user?role=USER",
+					"protocol": "http",
+					"host": [
+						"13",
+						"53",
+						"168",
+						"89"
+					],
+					"port": "8080",
+					"path": [
+						"bank",
+						"api",
+						"v1",
+						"user"
+					],
+					"query": [
+						{
+							"key": "role",
+							"value": "USER"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://13.53.168.89:8080/bank/api/v1/users",
+					"protocol": "http",
+					"host": [
+						"13",
+						"53",
+						"168",
+						"89"
+					],
+					"port": "8080",
+					"path": [
+						"bank",
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add role to user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"address\": \"Testveien 123\",\n  \"country\": \"United States\",\n  \"dob\": \"09/02/1969\",\n  \"emailAddress\": \"tester1@demo.io\",\n  \"username\": \"tester1@demo.io\",\n  \"firstName\": \"Fremtind\",\n  \"gender\": \"F\",\n  \"homePhone\": \"224-624-8286\",\n  \"lastName\": \"Tester\",\n  \"locality\": \"Oslo\",\n  \"mobilePhone\": \"872-380-9420\",\n  \"password\": \"Demo123!\",\n  \"postalCode\": \"0105\",\n  \"region\": \"VA\",\n  \"ssn\": \"123-45-9991\",\n  \"title\": \"Mrs\",\n  \"workPhone\": \"037-370-6915\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://13.53.168.89:8080/bank/api/v1/user/{{userId}}/role?role=API",
+					"protocol": "http",
+					"host": [
+						"13",
+						"53",
+						"168",
+						"89"
+					],
+					"port": "8080",
+					"path": [
+						"bank",
+						"api",
+						"v1",
+						"user",
+						"{{userId}}",
+						"role"
+					],
+					"query": [
+						{
+							"key": "role",
+							"value": "API"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get roles for user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"address\": \"Testveien 123\",\n  \"country\": \"United States\",\n  \"dob\": \"09/02/1969\",\n  \"emailAddress\": \"tester1@demo.io\",\n  \"username\": \"tester1@demo.io\",\n  \"firstName\": \"Fremtind\",\n  \"gender\": \"F\",\n  \"homePhone\": \"224-624-8286\",\n  \"lastName\": \"Tester\",\n  \"locality\": \"Oslo\",\n  \"mobilePhone\": \"872-380-9420\",\n  \"password\": \"Demo123!\",\n  \"postalCode\": \"0105\",\n  \"region\": \"VA\",\n  \"ssn\": \"123-45-9991\",\n  \"title\": \"Mrs\",\n  \"workPhone\": \"037-370-6915\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://13.53.168.89:8080/bank/api/v1/user/{{userId}}/role",
+					"protocol": "http",
+					"host": [
+						"13",
+						"53",
+						"168",
+						"89"
+					],
+					"port": "8080",
+					"path": [
+						"bank",
+						"api",
+						"v1",
+						"user",
+						"{{userId}}",
+						"role"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"variable": [
