@@ -4,7 +4,7 @@
 
     <test verbose="7" preserve-order="true" name="First Test Case">
         <classes>
-            <class name="digitalbank.GetPerson"/>
+            <class name="digitalbank.GetPersonTests"/>
         </classes>
     </test>
 

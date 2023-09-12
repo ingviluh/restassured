@@ -20,7 +20,7 @@ import static io.restassured.RestAssured.given;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
-public class GetPerson {
+public class GetPersonTests {
 
     @BeforeTest
     public static String getToken() {
