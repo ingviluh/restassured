@@ -4,7 +4,10 @@
 
     <test verbose="7" preserve-order="true" name="First Test Case">
         <classes>
-            <class name="digitalbank.GetPersonTests"/>
+            <class name="digitalbank.GetPerson"/>
+            <class name="digitalbank.AccountTests"/>
+            <class name="digitalbank.CheckingTests"/>
+            <class name="digitalbank.SavingsTests"/>
         </classes>
     </test>
 

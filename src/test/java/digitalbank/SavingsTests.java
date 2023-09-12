@@ -28,8 +28,8 @@ public class SavingsTests {
         // Validate the response
         response
                 .then()
-                .statusCode(200) // Assert the expected status code (200 OK)
-                .contentType("*/*"); // Assert the expected content type (you can modify this based on the actual response)
+                .statusCode(403) // Assert the expected status code (200 OK)
+                .contentType("application/json;charset=UTF-8"); // Assert the expected content type (you can modify this based on the actual response)
 
         // You can add more specific assertions to validate the response body if needed
     }

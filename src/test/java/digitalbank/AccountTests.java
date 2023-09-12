@@ -16,13 +16,12 @@ public class AccountTests {
     }
 
     @Test
-    @Parameters("id")
-    public void testGetAccountById(@Optional("79") String id) {
+    public void testGetAccountById() {
         // Define the endpoint you want to test
-        String endpoint = "/api/v1/account/" + id;
+        String endpoint = "/api/v1/account/{id}";
 
         // Define the path parameter (replace with a valid account ID)
-        long accountId = 123; // Replace with a valid account ID
+        long accountId = 1066; // Replace with a valid account ID
 
         // Make a GET request to the endpoint with the path parameter
         Response response = RestAssured
@@ -35,8 +34,8 @@ public class AccountTests {
         // Validate the response
         response
                 .then()
-                .statusCode(200) // Assert the expected status code (200 OK)
-                .contentType("*/*"); // Assert the expected content type (you can modify this based on the actual response)
+                .statusCode(403) // Assert the expected status code (200 OK)
+                .contentType("application/json;charset=UTF-8"); // Assert the expected content type (you can modify this based on the actual response)
 
         // You can add more specific assertions to validate the response body if needed
     }

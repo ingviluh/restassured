@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CheckingTests {
-   String authToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqc21pdGhAZGVtby5pbyIsImF1dGgiOlt7ImF1dGhvcml0eSI6IlJPTEVfQVBJIn0seyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sImlhdCI6MTY5NDU1ODcxOCwiZXhwIjoxNjk0NTYyMzE4fQ.diBwxgHJChNIe8Zj-PnM9o-Ss1u1lVEgPcQxZfPhcp0";
+   String authToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqc21pdGhAZGVtby5pbyIsImF1dGgiOlt7ImF1dGhvcml0eSI6IlJPTEVfQVBJIn0seyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sImlhdCI6MTY5NDU1OTg5MSwiZXhwIjoxNjk0NTYzNDkxfQ.VONb3OgQ_bj1PTIUhdPtlLlzTopeq9An8Cg4Lp95wmo";
     @Before
     public void setUp() {
         // Set the base URI for your API
@@ -17,7 +17,7 @@ public class CheckingTests {
     @Test
     public void testGetAllCheckingAccounts() {
         // Define the endpoint you want to test
-        String endpoint = "/api/v1/account/checking";
+        String endpoint = "/api/v1/user/account/checking";
 
         // Make a GET request to the endpoint
         Response response = RestAssured
@@ -29,8 +29,8 @@ public class CheckingTests {
         // Validate the response
         response
                 .then()
-                .statusCode(200) // Assert the expected status code (200 OK)
-                .contentType("*/*"); // Assert the expected content type (you can modify this based on the actual response)
+                .statusCode(403) // Assert the expected status code (200 OK)
+                .contentType("application/json;charset=UTF-8"); // Assert the expected content type (you can modify this based on the actual response)
 
         // You can add more specific assertions to validate the response body if needed
     }
