@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "9c52515c-e0c8-42b4-8a47-c9610c5a4e02",
-		"name": "SOCO 2023 - WORKSHOP - LØSNING",
+		"_postman_id": "09a12c7b-e29a-4e90-955e-750d9e1646fd",
+		"name": "aws",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "4553218",
-		"_collection_link": "https://olavthon.postman.co/workspace/Introduksjonskurs-i-Postman~6f2fa7a2-25dc-49d6-b369-ab802fd81aea/collection/4553218-9c52515c-e0c8-42b4-8a47-c9610c5a4e02?action=share&source=collection_link&creator=4553218"
+		"_exporter_id": "29688288"
 	},
 	"item": [
 		{
