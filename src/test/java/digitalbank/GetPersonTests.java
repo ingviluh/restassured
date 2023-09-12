@@ -11,6 +11,7 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -57,6 +58,8 @@ public class GetPersonTests {
                 .when()
                 .get("/users")
                 .then()
+                .body(containsString("id"))
+                .body("id", equalTo(id))
                 .statusCode(200);
     }
 
@@ -94,6 +97,9 @@ public class GetPersonTests {
     @Parameters("id")
     public void getCustomerName(@Optional("79") String id){
         given()
+                .accept(ContentType.JSON)
+                .contentType(ContentType.JSON)
+                .body(jsonString)
                 .when()
                 .get("/account/" + id)
                 .then()
