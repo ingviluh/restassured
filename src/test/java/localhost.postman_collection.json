@@ -241,8 +241,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 406\", function () {\r",
-							"    pm.response.to.have.status(406);\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -264,7 +264,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"amount\": 20000.00,\r\n  \"description\": \"Online Withdrawl\",\r\n  \"transactionTypeCode\": \"WTH\"\r\n}",
+					"raw": "{\r\n  \"amount\": 2,\r\n  \"description\": \"Online Withdrawl\",\r\n  \"transactionTypeCode\": \"WTH\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
